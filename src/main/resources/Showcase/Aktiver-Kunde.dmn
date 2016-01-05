@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="clientStatus" name="Kundenstatus">
+    <decisionTable id="decisionTable" hitPolicy="ANY">
+      <input id="input1" label="Kredit zurückgezahlt">
+        <inputExpression id="inputExpression1" typeRef="boolean">        <text>dazkzurueckgezahlt</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0eeelwd" label="Kredit gewährt">
+        <inputExpression id="LiteralExpression_1vzcsha" typeRef="boolean">        <text>dazkgewaehrt</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1fsp14p" label="Baudarlehen genehmigt">
+        <inputExpression id="LiteralExpression_182j45f" typeRef="boolean">        <text>baudagenehmigt</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_07d2r3p" label="Sparvertrag vorhanden">
+        <inputExpression id="LiteralExpression_01ihpna" typeRef="boolean">        <text>sparvertragexists</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Kundenstatus" name="clientStatus" typeRef="string" />
+      <rule id="row-186255721-4">
+        <description>Kunde aktiv letzter Zeit</description>
+        <inputEntry id="UnaryTests_02j2bvu">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0v1wcps">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0imscr9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_06oqe7b">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_13a4c43">        <text><![CDATA["clientActive"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-186255721-5">
+        <description>Kunde aktiv letzter Zeit</description>
+        <inputEntry id="UnaryTests_1iylwy2">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_17ekdcb">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1o9jqny">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_15x17ba">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_12ul8nr">        <text><![CDATA["clientActive"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-186255721-6">
+        <description>Kunde aktiv letzter Zeit</description>
+        <inputEntry id="UnaryTests_1mele0d">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_056p34n">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0jmssq3">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_05nwub8">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1oon8km">        <text><![CDATA["clientActive"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-186255721-7">
+        <description>Kunde aktiv letzter Zeit</description>
+        <inputEntry id="UnaryTests_0ajcn46">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_13j9xoe">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_16xiqg9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1c6ebvl">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0g326rt">        <text><![CDATA["clientActive"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-186255721-8">
+        <description>Kunde nicht aktiv letzter Zeit</description>
+        <inputEntry id="UnaryTests_15gf39e">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0eb0mae">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1p20nnb">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_05plcil">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_024v02s">        <text><![CDATA["clientNotActive"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

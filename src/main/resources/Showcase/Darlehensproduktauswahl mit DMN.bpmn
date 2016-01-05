@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="sid-9e672fc3-e08d-44c7-8481-063d6bc43c80" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="9.3.2" expressionLanguage="http://www.w3.org/TR/XPath" targetNamespace="http://www.signavio.com">
+  <process id="SC-DPA-DMN" name="Darlehensproduktauswahl mit DMN" isExecutable="true">
+    <extensionElements>
+      <signavio:signavioDiagramMetaData metaKey="revisionid" metaValue="7970a5f91736446cacfba9c75779e576"/>
+    </extensionElements>
+    <startEvent id="sid-CCBA742A-BF49-482E-8B77-D8A15CFC0492" name="Kunden-ID und Kreditbetrag erfassen">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
+        <camunda:formData>
+          <camunda:formField id="geburtszahl_form" label="Kunden-ID" type="string">
+            <camunda:validation>
+              <camunda:constraint name="required"/>
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="kreditbetrag_form" label="Kreditbetrag" type="string">
+            <camunda:validation>
+              <camunda:constraint name="required"/>
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </extensionElements>
+      <outgoing>SequenceFlow_5</outgoing>
+    </startEvent>
+    <serviceTask id="sid-C6CE5A24-B44C-44BE-9CFB-1E3B35830BB0" camunda:class="com.venit.dmn.demo.GetDataFromXMLDelegate" name="Daten aus Core Banking System ermitteln" implementation="##WebService">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
+        <camunda:properties>
+          <camunda:property value="ClientDB_DMN" name="XMLInputName"/>
+          <camunda:property value="cbsexists" name="xml_attribute"/>
+          <camunda:property value="dazkzurueckgezahlt" name="xml_attribute01"/>
+          <camunda:property value="dazkgewaehrt" name="xml_attribute02"/>
+          <camunda:property value="baudagenehmigt" name="xml_attribute03"/>
+          <camunda:property value="sparvertragexists" name="xml_attribute04"/>
+          <camunda:property value="bank_zahldiszip" name="xml_attribute05"/>
+          <camunda:property value="regelm_bespart" name="xml_attribute06"/>
+          <camunda:property value="bank_darlehen" name="xml_attribute07"/>
+          <camunda:property value="ext_kredit" name="xml_attribute08"/>
+          <camunda:property value="ext_zahldiszip" name="xml_attribute09"/>
+          <camunda:property value="bwz" name="xml_attribute10"/>
+          <camunda:property value="befragt" name="xml_attribute11"/>
+        </camunda:properties>
+      </extensionElements>
+      <incoming>SequenceFlow_5</incoming>
+      <outgoing>SequenceFlow_6</outgoing>
+    </serviceTask>
+    <businessRuleTask id="sid-8DDC189D-1B05-4788-AC31-39845074B21B" camunda:resultVariable="product" camunda:decisionRef="productSelection" camunda:mapDecisionResult="collectEntries" name="Anzubietendes Kreditprodukt bestimmen" implementation="##WebService">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
+      </extensionElements>
+      <incoming>SequenceFlow_1iawlze</incoming>
+      <outgoing>sid-E005FD7D-69D3-4E99-B080-E144A3B50778</outgoing>
+    </businessRuleTask>
+    <userTask id="sid-4C531F26-9A1C-492A-A3F1-E4618083DE6E" camunda:assignee="demo" name="Ergebnis (anzubietendes Kreditprodukt) anzeigen" implementation="##WebService">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
+        <camunda:formData>
+          <camunda:formField id="product" label="Produkt" type="string"/>
+        </camunda:formData>
+      </extensionElements>
+      <incoming>sid-E005FD7D-69D3-4E99-B080-E144A3B50778</incoming>
+      <outgoing>sid-152D68FC-A433-4AA2-9B63-0F3235C49208</outgoing>
+    </userTask>
+    <endEvent id="sid-819115EA-F54F-42D8-B904-A5342E12FE3A" name="">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
+      </extensionElements>
+      <incoming>sid-152D68FC-A433-4AA2-9B63-0F3235C49208</incoming>
+    </endEvent>
+    <sequenceFlow id="sid-E005FD7D-69D3-4E99-B080-E144A3B50778" name="" sourceRef="sid-8DDC189D-1B05-4788-AC31-39845074B21B" targetRef="sid-4C531F26-9A1C-492A-A3F1-E4618083DE6E"/>
+    <sequenceFlow id="sid-152D68FC-A433-4AA2-9B63-0F3235C49208" name="" sourceRef="sid-4C531F26-9A1C-492A-A3F1-E4618083DE6E" targetRef="sid-819115EA-F54F-42D8-B904-A5342E12FE3A"/>
+    <sequenceFlow id="SequenceFlow_5" name="" sourceRef="sid-CCBA742A-BF49-482E-8B77-D8A15CFC0492" targetRef="sid-C6CE5A24-B44C-44BE-9CFB-1E3B35830BB0"/>
+    <sequenceFlow id="SequenceFlow_6" name="" sourceRef="sid-C6CE5A24-B44C-44BE-9CFB-1E3B35830BB0" targetRef="BusinessRuleTask_0xbcxob"/>
+    <businessRuleTask id="BusinessRuleTask_0xbcxob" camunda:resultVariable="darlehenstyp" camunda:decisionRef="darlehenstyp" camunda:mapDecisionResult="singleEntry" name="Darlehenstyp bestimmen">
+      <incoming>SequenceFlow_6</incoming>
+      <outgoing>SequenceFlow_19h4jz3</outgoing>
+    </businessRuleTask>
+    <sequenceFlow id="SequenceFlow_19h4jz3" sourceRef="BusinessRuleTask_0xbcxob" targetRef="BusinessRuleTask_11qepu4"/>
+    <sequenceFlow id="SequenceFlow_1iawlze" sourceRef="BusinessRuleTask_11qepu4" targetRef="sid-8DDC189D-1B05-4788-AC31-39845074B21B"/>
+    <businessRuleTask id="BusinessRuleTask_11qepu4" camunda:resultVariable="clientStatus" camunda:decisionRef="clientStatus" camunda:mapDecisionResult="singleEntry" name="Kundenstatus bestimmen">
+      <incoming>SequenceFlow_19h4jz3</incoming>
+      <outgoing>SequenceFlow_1iawlze</outgoing>
+    </businessRuleTask>
+  </process>
+  <bpmndi:BPMNDiagram id="sid-31d7c224-d65b-4588-a01c-e5448e6d7f22">
+    <bpmndi:BPMNPlane id="sid-0875d6f1-73a6-4ee2-b412-af2b99a1604d" bpmnElement="SC-DPA-DMN">
+      <bpmndi:BPMNShape id="sid-CCBA742A-BF49-482E-8B77-D8A15CFC0492_gui" bpmnElement="sid-CCBA742A-BF49-482E-8B77-D8A15CFC0492">
+        <omgdc:Bounds height="30.0" width="30.0" x="132.0" y="87.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-2e568963-b1ca-482f-85b7-f7d3c8c7e6c5">
+          <omgdc:Bounds height="22.0" width="108.0" x="93.0" y="119.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-C6CE5A24-B44C-44BE-9CFB-1E3B35830BB0_gui" bpmnElement="sid-C6CE5A24-B44C-44BE-9CFB-1E3B35830BB0">
+        <omgdc:Bounds height="80.0" width="100.0" x="231.0" y="62.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-1a6b4836-b658-49ff-abf4-7214e3351d58">
+          <omgdc:Bounds height="24.0" width="55.542862" x="240.97858" y="136.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-8DDC189D-1B05-4788-AC31-39845074B21B_gui" bpmnElement="sid-8DDC189D-1B05-4788-AC31-39845074B21B">
+        <omgdc:Bounds height="80.0" width="100.0" x="681.0" y="62.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-1a6b4836-b658-49ff-abf4-7214e3351d58">
+          <omgdc:Bounds height="36.0" width="80.22858" x="397.3857" y="130.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-4C531F26-9A1C-492A-A3F1-E4618083DE6E_gui" bpmnElement="sid-4C531F26-9A1C-492A-A3F1-E4618083DE6E">
+        <omgdc:Bounds height="80.0" width="100.0" x="829.0" y="62.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-1a6b4836-b658-49ff-abf4-7214e3351d58">
+          <omgdc:Bounds height="36.0" width="80.22858" x="566.13574" y="130.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-819115EA-F54F-42D8-B904-A5342E12FE3A_gui" bpmnElement="sid-819115EA-F54F-42D8-B904-A5342E12FE3A">
+        <omgdc:Bounds height="28.0" width="28.0" x="973.0" y="88.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="20.0" width="90.0" x="942.0" y="116.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="sid-E005FD7D-69D3-4E99-B080-E144A3B50778_gui" bpmnElement="sid-E005FD7D-69D3-4E99-B080-E144A3B50778">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="781.0" y="102.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="829.0" y="102.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="20.0" width="90.0" x="777.0" y="92.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-152D68FC-A433-4AA2-9B63-0F3235C49208_gui" bpmnElement="sid-152D68FC-A433-4AA2-9B63-0F3235C49208">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="929.0" y="102.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="973.0" y="102.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="20.0" width="90.0" x="946.0" y="92.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="sid-CCBA742A-BF49-482E-8B77-D8A15CFC0492_gui" targetElement="sid-C6CE5A24-B44C-44BE-9CFB-1E3B35830BB0_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="162.0" y="102.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="230.0" y="102.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="20.0" width="90.0" x="151.0" y="92.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="sid-C6CE5A24-B44C-44BE-9CFB-1E3B35830BB0_gui" targetElement="sid-8DDC189D-1B05-4788-AC31-39845074B21B_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="331.0" y="102.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="382.0" y="102.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="20.0" width="90.0" x="285.0" y="92.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_0xbcxob_di" bpmnElement="BusinessRuleTask_0xbcxob">
+        <omgdc:Bounds height="80.0" width="100.0" x="382.0" y="62.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_19h4jz3_di" bpmnElement="SequenceFlow_19h4jz3">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="482.0" y="102.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="528.0" y="102.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="20.0" width="90.0" x="440.5" y="92.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1iawlze_di" bpmnElement="SequenceFlow_1iawlze">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="628.0" y="102.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="681.0" y="102.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="20.0" width="90.0" x="613.0" y="92.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_11qepu4_di" bpmnElement="BusinessRuleTask_11qepu4">
+        <omgdc:Bounds height="80.0" width="100.0" x="528.0" y="62.0"/>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNLabelStyle id="sid-2e568963-b1ca-482f-85b7-f7d3c8c7e6c5">
+      <omgdc:Font name="Arial" size="11.0"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="sid-1a6b4836-b658-49ff-abf4-7214e3351d58">
+      <omgdc:Font name="Arial" size="12.0"/>
+    </bpmndi:BPMNLabelStyle>
+  </bpmndi:BPMNDiagram>
+</definitions>

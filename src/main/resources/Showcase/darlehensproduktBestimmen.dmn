@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="productSelection" name="Darlehensprodukt bestimmen">
+    <decisionTable id="decisionTable" hitPolicy="RULE ORDER">
+      <input id="input1" label="Person in CBS">
+        <inputExpression id="inputExpression1" typeRef="boolean">        <text>cbsexists</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_16jkosd" label="Externer Kredit">
+        <inputExpression id="LiteralExpression_0bh5f3f" typeRef="boolean">        <text>ext_kredit</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1a1bhlv" label="Ext Zahlungsdisziplin">
+        <inputExpression id="LiteralExpression_18l85ob" typeRef="string">        <text>ext_zahldiszip</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0ndes32" label="Darlehenstyp">
+        <inputExpression id="LiteralExpression_10qo1yz" typeRef="string">        <text>darlehenstyp</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1ecn0ma" label="Recht aus Sparprodukt">
+        <inputExpression id="LiteralExpression_0u4thgd" typeRef="boolean">        <text>befragt</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1akpe22" label="Kundenstatus">
+        <inputExpression id="LiteralExpression_1pculze" typeRef="string">        <text>clientStatus</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0gwud81" label="Bankdarlehen vorhanden">
+        <inputExpression id="LiteralExpression_0tac98k" typeRef="boolean">        <text>bank_darlehen</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0acu2oj" label="Zahlungsdisziplin bei der Bank">
+        <inputExpression id="LiteralExpression_0425p1w" typeRef="string">        <text>bank_zahldiszip</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0euhk65" label="Regelm. gespart">
+        <inputExpression id="LiteralExpression_1sr3v28" typeRef="boolean">        <text>regelm_bespart</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1d3cxjk" label="Koeffizient Kunde">
+        <inputExpression id="LiteralExpression_0vbx98y" typeRef="integer">        <text>bwz</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Produkt" name="product" typeRef="string" />
+      <rule id="row-647584991-1">
+        <inputEntry id="UnaryTests_1pdkxsz">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0311hjg">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_19tk5d9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0yyf796">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0kfoad8">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0gpw3j6">        <text><![CDATA["clientActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1wqb91u">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0afhn0v">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_19k6bh7">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_05gdhjk">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_05kvy86">        <text><![CDATA["F"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-5">
+        <inputEntry id="UnaryTests_0wdwlf7">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0f1kpvj">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_02703qm">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_08f1h6n">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0fcgxmm">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1qay3di">        <text><![CDATA["clientActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0zmiis9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1gvhsqq">        <text><![CDATA["NOK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_13lnh2f">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1hp8n0h">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1lmfamm">        <text><![CDATA["Kein Produkt"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-9">
+        <inputEntry id="UnaryTests_01v4vao">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0p854fx">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1w9jv3j">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ztmdq9">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0gbf0uc">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_16w8vfx">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_01kbnca">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0jxyqcv">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1s8gxmm">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1vrlfpf">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0vxnfix">        <text><![CDATA["C"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-10">
+        <inputEntry id="UnaryTests_0kpafhm">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0xazj1e">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1866005">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1oburep">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_10dbljq">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0wi6hzl">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0iddxby">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0dnyk39">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_039ibez">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_041qke4">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0ewhbwm">        <text><![CDATA["C"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-11">
+        <inputEntry id="UnaryTests_1ipl2ag">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_041l358">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_05ucfk9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1u4bu20">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_01yymp5">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_071x0kl">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1lx9vjl">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_11mybwg">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0cvq2m7">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_14xz8ie">        <text>[5..50]</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_00llmcj">        <text><![CDATA["D"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-12">
+        <inputEntry id="UnaryTests_1n3c0ti">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0svc3uz">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0mr8rw3">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_00dj8as">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0c5tpml">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1jaufk1">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_06h3fzv">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1nwk6fj">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0pu3y3t">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1so4hqj">        <text>[5..50]</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1a60pgn">        <text><![CDATA["D"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-13">
+        <inputEntry id="UnaryTests_1q5x6en">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0qsxial">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1639u9f">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0x000no">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_106wrjz">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1umpczh">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0wrwne8">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bdzcqu">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_138l6e2">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1oyrmcx">        <text><![CDATA[> 50]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_11jxwiu">        <text><![CDATA["B"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-14">
+        <inputEntry id="UnaryTests_15mjjv6">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1tqbj44">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_114ai1h">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1mkos9w">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1x6xrgb">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_04bgmse">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0u80148">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1trocb8">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1xie8cl">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1u33d7m">        <text><![CDATA[>= 50]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1fksj19">        <text><![CDATA["B"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-15">
+        <inputEntry id="UnaryTests_1rsdvcv">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1k602nx">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0gob06b">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0unhko8">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_14zmghq">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0idjl36">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1n9302b">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0zaopsz">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0pkojaq">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0vjgde4">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0nj65u2">        <text><![CDATA["A"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-16">
+        <inputEntry id="UnaryTests_0e75lk9">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_06yxkro">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1c0cdxe">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1qebswk">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0v8f55q">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_18djkvy">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0rabdx6">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_06hhkie">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0px460l">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0amds7g">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1wuyw70">        <text><![CDATA["A"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-17">
+        <inputEntry id="UnaryTests_16ndi1g">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ng2xpt">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0g1tlg1">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0lp4981">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_12vw6w2">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_122m29b">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0b9ug2e">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_175hpit">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1v50sij">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1hyg5pq">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_10fx4b3">        <text><![CDATA["C"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-18">
+        <inputEntry id="UnaryTests_0qnq4z7">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ct05vz">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0u5j9rd">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0bg9szi">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0gkdfzr">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_12ekihf">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0mj8u5b">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0kpg64x">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_06kf6k5">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1v4g3d3">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_00vyo0r">        <text><![CDATA["C"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-19">
+        <inputEntry id="UnaryTests_1rweh2e">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1gd4oyb">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0w92hcw">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1iu6gsd">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0b7u1r4">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1153e2u">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0sxo1qc">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0x8ncln">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0gnzjub">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1vaazjr">        <text>[5..50]</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1lwlg24">        <text><![CDATA["D"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-416867635-4">
+        <inputEntry id="UnaryTests_1c839ie">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1yincad">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0i4g5fh">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_124t96a">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1qiw3k3">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_08xds33">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1eqlsid">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0dotm65">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0cfb2eq">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1iuy30s">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0c0788m">        <text><![CDATA["A"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-647584991-20">
+        <inputEntry id="UnaryTests_0yrnwpe">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1mzwbum">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1pwkxv4">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0irrl9a">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0dy39dc">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_05n4cc9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1c1kevu">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_00w5h6a">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1dagffn">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_12aih8p">        <text>[5..50]</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0b1whhp">        <text><![CDATA["D"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-480324061-1">
+        <inputEntry id="UnaryTests_1lcb8e2">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0vugnkp">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_16ofrqq">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0n5w12r">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_035io7v">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0z26udh">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1xuks8c">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1fnux13">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1oa7ngl">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0j2kxsb">        <text><![CDATA[>= 50]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1rxqzt6">        <text><![CDATA["B"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-480324061-2">
+        <inputEntry id="UnaryTests_07jqoyd">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_106ocyr">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_15yhc1u">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1azqp6c">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ejxiwn">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0y4fned">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_18nbqs9">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0f2wl7h">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0pf94v9">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1yf2r8s">        <text><![CDATA[>= 50]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0g34d68">        <text><![CDATA["B"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-480324061-3">
+        <inputEntry id="UnaryTests_0cf744x">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1eyuprd">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_018ce4m">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_159kjft">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0adi7qv">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0u0vow6">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1qcu6gd">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1mrylli">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0z4q9ao">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1vny7v1">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_10zojrg">        <text><![CDATA["A"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-1">
+        <inputEntry id="UnaryTests_1ndqw7a">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_16dw7d4">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1il1ziq">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1gsu6jx">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1gjgedk">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0kq260y">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_02jz8uy">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0xqpw8h">        <text><![CDATA["NOK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0aeggqx">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1k72c74">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0qsuuxb">        <text><![CDATA["Kein Produkt"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-2">
+        <inputEntry id="UnaryTests_15ic3vs">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0xr4wj5">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1uf8cef">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1gmrtr5">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1xpx9fs">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ct9s4e">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1uo8rq4">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1yawmcc">        <text><![CDATA["NOK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ci0btc">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0clzf8z">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0i2gigi">        <text><![CDATA["Kein Produkt"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-3">
+        <inputEntry id="UnaryTests_12rn76o">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1lb2hma">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0apf501">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_13i7mj9">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1vpzqnn">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1jlatvz">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1tzxu0i">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1qot9z3">        <text><![CDATA["NOK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1npu9rp">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0qn4ev8">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0348chq">        <text><![CDATA["A Stern"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-4">
+        <inputEntry id="UnaryTests_1xl624f">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0cy447q">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_03jvvuu">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0wrgf7v">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0di617z">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_12bmw6e">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1vysocx">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_02w8tg2">        <text><![CDATA["NOK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_179oaq1">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0w2azgf">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1alde6c">        <text><![CDATA["A Stern"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-5">
+        <inputEntry id="UnaryTests_0m97dt4">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_13dn9ub">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1dvmlrv">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0kwp36p">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1uf3y2u">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0g6vkcc">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bkjif3">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1k39ffd">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1jls96h">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1y0nwub">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0ol8ccv">        <text><![CDATA["C"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-6">
+        <inputEntry id="UnaryTests_0ifykto">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0wf8xn7">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1t43xes">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0tfyo78">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_09p67fm">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bxsf3n">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0rowply">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1pmolrt">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1f8yile">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_01ht5cu">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1mdshke">        <text><![CDATA["C"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-7">
+        <inputEntry id="UnaryTests_0cwvf67">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_05hja5i">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0wafg93">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0jii59s">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1mpykd7">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_06zspv8">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1d0yc7w">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_04kwer2">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1v3k4hs">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1a0dgnw">        <text>[5..50]</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0ak464w">        <text><![CDATA["D"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-8">
+        <inputEntry id="UnaryTests_1z0e0mb">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1aininj">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1h6smew">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1jv15zf">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1x0vkwf">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_19esadg">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ir0bsm">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_03jl08z">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_06vor0z">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ginrdm">        <text>[5..50]</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1ousgas">        <text><![CDATA["D"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-9">
+        <inputEntry id="UnaryTests_19omo0m">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_10rqn8b">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0i6sry0">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1tog2qd">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0w5dq0z">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_10tgf1t">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_127gut6">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0e6buq4">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0imfkrl">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1r8lxf0">        <text><![CDATA[>= 50]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_00xa3t9">        <text><![CDATA["B"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-10">
+        <inputEntry id="UnaryTests_0fifgc7">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ziyfqq">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0o7tvuf">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0v769uk">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0pk01b1">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0f6kro1">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_02yeqht">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_04utlat">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1tr40qt">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0zjckhg">        <text><![CDATA[>= 50]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1y3p3vs">        <text><![CDATA["B"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-11">
+        <inputEntry id="UnaryTests_1shvz3d">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1t2r5f8">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_00v71g9">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_03kdzin">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1h66pbu">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0pcb4mc">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_11tcgr0">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_16dq2r9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0hm5px2">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0dk4z3l">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1yinlek">        <text><![CDATA["A"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-12">
+        <inputEntry id="UnaryTests_0uvkgtx">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1o1ttbm">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0d6r0rw">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ibsh4t">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1od6sn2">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_11s4tlt">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1xl29r7">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0zxb1j8">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0t9tryr">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1tvap1s">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1dy1mm3">        <text><![CDATA["A"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-13">
+        <inputEntry id="UnaryTests_1txqvxc">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1j11bgu">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1anuh7w">        <text><![CDATA["NOK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0rdg9dl">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ladql6">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0d4ap8z">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1vn6urv">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1qljevm">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0n9qoi9">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_04oovcw">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1o22tqm">        <text><![CDATA["Kein Produkt"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-14">
+        <inputEntry id="UnaryTests_16civtw">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0fo3ip8">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_07kb687">        <text><![CDATA["NOK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1n3nkqq">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1mxn5a9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bqn00u">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1riyvol">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_103jqjo">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0erwjvi">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0vr63bz">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_08awklx">        <text><![CDATA["Kein Produkt"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-15">
+        <inputEntry id="UnaryTests_0scaf18">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0aoky7a">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1cn6bhd">        <text><![CDATA["NOK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_15i4mzc">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ge1yy2">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_085m22y">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1d1uveo">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1uat28v">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1mw4yg3">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1dgwxeg">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_15e0c53">        <text><![CDATA["A Stern"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-16">
+        <inputEntry id="UnaryTests_1r48mfi">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ho8cb0">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ffw5xp">        <text><![CDATA["NOK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_00abrqa">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1vhwiid">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1yiy9zt">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_13nt7mw">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_064xhwx">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_13kd896">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1wdphif">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1rpwse5">        <text><![CDATA["A Stern"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-17">
+        <inputEntry id="UnaryTests_14uxncc">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bvrljx">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1oslwli">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1rcopov">        <text><![CDATA["klein"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ws0m62">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_196259q">        <text><![CDATA["clientNotActive"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1et3up7">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1l2hrvg">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0s7oyjl">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0189wns">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_19oaj47">        <text><![CDATA["E"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-18">
+        <inputEntry id="UnaryTests_03vkr9o">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0m9b1fx">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0sac3zo">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_067zf7o">        <text><![CDATA["gross"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_08z0x6j">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bgutms">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1lhupqy">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0m35vgb">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_10xtqqm">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0s6m3nd">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0yped3o">        <text><![CDATA["E"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-19">
+        <inputEntry id="UnaryTests_0ru40l2">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_03ofby5">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0dfx4yg">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1pn2anc">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0dmcvww">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1prmhls">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1mir315">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_09caz8h">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0p4pho9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0f9bwl7">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0pxocgu">        <text><![CDATA["E"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-20">
+        <inputEntry id="UnaryTests_0swpwts">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0z9cpx5">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0d88z0m">        <text><![CDATA["OK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0kdzj9w">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1rj2ibg">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1da0zql">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1p4wtym">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ap1wal">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_17g2bvm">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1c3p79s">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0hau7lx">        <text><![CDATA["C"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-662701493-21">
+        <inputEntry id="UnaryTests_16s6t4z">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ceekba">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0yjkeas">        <text><![CDATA["NOK"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ubqqqd">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0knz0u1">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1o56bev">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1xyes71">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0dyn9gb">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0uvj78u">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_038ms4u">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_08h8xo1">        <text><![CDATA["Kein Produkt"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
