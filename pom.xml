@@ -3,64 +3,43 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.venit.dmn</groupId>
 	<artifactId>venit-creditproduct-selection</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>venit-creditproduct-selection</name>
 	<description>Sample camunda based application for loan product selection.</description>
-	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<camunda.version>7.5.0</camunda.version>
+		<spring.version>3.1.2.RELEASE</spring.version>
 	</properties>
-  	
-  	<repositories>
-		<repository>
-			<id>central</id>
-			<name>jupiterartifactory-releases</name>
-			<url>https://remote.ven-it.com/jupiterartifactory/libs-release-local</url>
-		</repository>
-		<repository>
-			<id>snapshots</id>
-			<name>jupiterartifactory-snapshots</name>
-			<url>https://remote.ven-it.com/jupiterartifactory/libs-snapshot-local</url>
-		</repository>
-	</repositories>
-	
 	<dependencies>
-
-		<dependency>
-			<groupId>org.camunda.bpm</groupId>
-			<artifactId>camunda-engine</artifactId>
-			<version>7.4.0</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
-			<groupId>com.venit.dmn</groupId>
-			<artifactId>venit-demodmn</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.camunda.bpm</groupId>
+			<artifactId>camunda-engine</artifactId>
+			<version>${camunda.version}</version>
+			<scope>provided</scope>
 		</dependency>
-
-
+		<dependency>
+			<groupId>xmlunit</groupId>
+			<artifactId>xmlunit</artifactId>
+			<version>1.5</version>
+		</dependency>
 	</dependencies>
-
 	<build>
 		<pluginManagement>
 			<plugins>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
@@ -69,7 +48,6 @@
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>
-
 				<!-- Copying input XML-s Tomcat directory. -->
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
@@ -83,7 +61,7 @@
 							</goals>
 							<configuration>
 								<!-- <outputDirectory>${CATALINA_HOME}/XML</outputDirectory> -->
-								<outputDirectory>${user.home}/camunda-bpm-tomcat-7.4.0/server/apache-tomcat-8.0.24/XML</outputDirectory>
+								<outputDirectory>${user.home}/camunda-bpm-tomcat-7.5.0/server/apache-tomcat-8.0.24/XML</outputDirectory>
 								<resources>
 									<resource>
 										<directory>${basedir}/input_XML</directory>
@@ -94,7 +72,6 @@
 						</execution>
 					</executions>
 				</plugin>
-
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
@@ -126,8 +103,49 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>shade</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-compiler-plugin
+										</artifactId>
+										<versionRange>[2.5.1,)</versionRange>
+										<goals>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-
 </project>
